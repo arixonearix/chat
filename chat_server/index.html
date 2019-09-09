@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Socket.IO chat</title>
+        <link rel="apple-touch-icon" href="/static/media/logo.5d5d9eef.svg" />
+    </head>
+    <body>
+        <div id="root"></div>
+        <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+        <script>
+            window.socket = io();
+        </script>
+        <!-- for development purposes -->
+        <script type="text/javascript" src="http://localhost:3000/static/js/0.chunk.js"></script>
+        <script type="text/javascript" src="http://localhost:3000/static/js/bundle.js"></script>
+        <script type="text/javascript" src="http://localhost:3000/static/js/main.chunk.js"></script>
+        <!-- /for development purposes -->
+
+        <!-- generated build -->
+<!--        <script type="text/javascript" src="static/js/2.89c34a80.chunk.js"></script>-->
+<!--        <script type="text/javascript" src="static/js/main.abc95a61.chunk.js"></script>-->
+<!--        <script type="text/javascript" src="static/js/runtime~main.3d2c9e82.js"></script>-->
+        <!-- /generated build -->
+
+        <script
+                src="https://code.jquery.com/jquery-3.4.1.min.js"
+                integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+                crossorigin="anonymous"></script>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+        <script type="text/javascript">
+            window.toastr = toastr;
+        </script>
+    </body>
+</html>
