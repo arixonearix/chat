@@ -2,9 +2,8 @@ import React from 'react';
 import logo from '../logo.svg';
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import NameInput from "./NameInput";
-import LoginButton from "../components/LoginButton";
-
+import NameInput from "../containers/NameInputContainer";
+import LoginButton from "../containers/LoginButtonContainer";
 
 class Main extends React.Component {
     constructor(props) {
@@ -18,18 +17,13 @@ class Main extends React.Component {
         this.setState({ login: login });
     };
 
-    sendLogin = () => {
-        window.socket.emit('login', this.state.login);
-        this.state.switchPages(true);
-    };
-
     render() {
         return <div className="App">
             <header className="App-header">
                 <img src={logo} className="App-logo" alt="logo"/>
                 <div className={'name-input-holder'}>
-                    <NameInput updateLogin={this.updateLogin}/>
-                    <LoginButton login={this.state.login} sendLogin={this.sendLogin}/>
+                    <NameInput />
+                    <LoginButton />
                 </div>
 
             </header>

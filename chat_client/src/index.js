@@ -8,7 +8,7 @@ import {createStore} from "redux";
 import {Provider} from 'react-redux';
 import allReducers from './reducers';
 import * as serviceWorker from './serviceWorker';
-import Holder from "./components/Holder";
+import Holder from "./containers/HolderContainer";
 
 
 const store = createStore(allReducers);

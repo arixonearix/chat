@@ -8,44 +8,30 @@ class MainChat extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            login: props.login,
-            tempMessage: '',
-            messages: [
-                {nickname:'Server', message:'Welcome message!'}
-            ]
+            messages: props.messages
         };
     }
-
     componentWillMount() {
         window.socket.on('message', (message) => {
-            this.setState(state => {
-                state.messages.push(message);
-                return {
-                    messages: state.messages,
-                    tempMessage: state.tempMessage
-                };
-            });
+            this.newMessage(message);
         });
         window.socket.on('notification', (data) => {
             window.toastr.info(data.message);
         });
     }
-
-    handleChange(message) {
-        this.setState({tempMessage: message});
+    handleChange(event) {
+        this.props.handleMessage(event);
     }
     sendMessage() {
-        if(this.state.tempMessage) {
-            window.socket.emit('message', this.state.tempMessage);
-        } else {
-            console.log('Enter message');
-        }
+        this.props.sendMessage();
+    }
+    newMessage(messageObject){
+        this.props.newMessage(messageObject);
     }
     render() {
         console.log(this.state);
-        let messages = this.state.messages;
         return <div className="App">
-                <ChatWindow messages={messages} />
+                <ChatWindow messages={this.state.messages.messages} />
                 <ChatInput sendMessage={this.sendMessage.bind(this)} handleMessage={this.handleChange.bind(this)} />
         </div>
     };

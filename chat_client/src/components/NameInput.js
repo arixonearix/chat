@@ -10,8 +10,7 @@ class NameInput extends React.Component {
         };
     }
     handleChange(event) {
-        this.setState({login: event.target.value});
-        this.props.updateLogin(event.target.value);
+        this.props.handleChange(event.target.value);
     }
     render() {
         return <div className={'input-holder'}>

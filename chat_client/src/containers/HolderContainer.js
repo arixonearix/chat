@@ -2,13 +2,14 @@ import React from 'react';
 import {connect} from "react-redux";
 import {makeLogin} from '../actions/actions';
 import LoginButton from "../components/LoginButton";
+import Holder from '../components/Holder';
 
-const mapDispatchToProps = (dispatch) => {
+function mapStateToProps(state) {
+
+    console.log(state);
     return {
-        click: () => {
-            dispatch(makeLogin());
-        }
+        ...state
     };
-};
+}
 
-export default connect(null, mapDispatchToProps) (LoginButton);
+export default connect(mapStateToProps, null) (Holder);

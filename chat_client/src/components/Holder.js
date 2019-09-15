@@ -1,25 +1,18 @@
 import React from 'react';
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import MainChat from "./MainChat";
+import MainChat from "../containers/MainChatContainer";
 import Main from "./Main";
 
 class Holder extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            trigger: false
-        };
-    }
-    switchPages(trigger) {
-        this.setState({trigger: trigger});
-    }
-
     render() {
+        let props = this.props.logins;
+        let messages = this.props.messages;
+
         return <div>
-            {this.state.trigger
-                ? <MainChat login={'max'} />
-                : <Main switchPages={this.switchPages.bind(this)}/>
+            {props.switchPages
+                ? <MainChat messages={messages} />
+                : <Main />
             }
         </div>
     };
