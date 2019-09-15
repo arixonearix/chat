@@ -6,7 +6,6 @@ import Holder from '../components/Holder';
 
 function mapStateToProps(state) {
 
-    console.log(state);
     return {
         ...state
     };

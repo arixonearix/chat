@@ -18,3 +18,7 @@ code {
 .input-holder .chat-input-button {
   width: 15%;
 }
+.button-close {
+  position: absolute;
+  right: 1px;
+}

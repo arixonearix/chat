@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {changeTempLogin, changeTempMessage, newMessage, sendTempMessage} from '../actions/actions';
+import {changeTempLogin, changeTempMessage, closeConnection, newMessage, sendTempMessage} from '../actions/actions';
 import NameInput from "../components/NameInput";
 import MainChat from '../components/MainChat';
 
@@ -14,6 +14,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         newMessage: (messageObject) => {
             dispatch(newMessage(messageObject));
+        },
+        closeConnection: () => {
+            dispatch(closeConnection());
         }
     };
 };

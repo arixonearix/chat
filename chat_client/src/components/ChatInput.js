@@ -30,7 +30,7 @@ class ChatInput extends React.Component {
                 onKeyDown={this.handleKeyDown.bind(this)}
             />
             <button
-                className={'chat-input-button'}
+                className={'btn btn-success chat-input-button'}
                 onClick={this.sendMessage.bind(this)}
             >SEND</button>
         </div>

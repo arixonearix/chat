@@ -28,9 +28,16 @@ class MainChat extends React.Component {
     newMessage(messageObject){
         this.props.newMessage(messageObject);
     }
+    closeConnection() {
+        this.props.closeConnection();
+    }
     render() {
-        console.log(this.state);
         return <div className="App">
+                <button
+                    type="button"
+                    className="btn btn-danger button-close"
+                    onClick={this.closeConnection.bind(this)}
+                >Exit</button>
                 <ChatWindow messages={this.state.messages.messages} />
                 <ChatInput sendMessage={this.sendMessage.bind(this)} handleMessage={this.handleChange.bind(this)} />
         </div>

@@ -3,7 +3,6 @@ import '../App.css';
 import Message from "./Message";
 
 class ChatWindow extends React.Component {
-
     render() {
         let list = this.props.messages.map((message ,index) => {
             return <div key={index}>

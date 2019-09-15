@@ -4,6 +4,7 @@ export const SEND_MESSAGE = 'SEND_MESSAGE';
 export const CHANGE_TEMP_MESSAGE = 'CHANGE_TEMP_MESSAGE';
 export const SEND_TEMP_MESSAGE = 'SEND_TEMP_MESSAGE';
 export const NEW_MESSAGE ='NEW_MESSAGE';
+export const CLOSE_CONNECTION ='CLOSE_CONNECTION';
 
 
 export const toggleExpand = (login) => ({
@@ -36,5 +37,10 @@ export const newMessage = (messageObject) => {
     return {
         type: NEW_MESSAGE,
         messageObject
+    };
+};
+export const closeConnection = () => {
+    return {
+        type: CLOSE_CONNECTION
     };
 };

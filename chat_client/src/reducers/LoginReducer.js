@@ -1,11 +1,10 @@
-import {LOGIN, CHANGE_TEMP_LOGIN} from '../actions/actions';
+import {LOGIN, CHANGE_TEMP_LOGIN, CLOSE_CONNECTION} from '../actions/actions';
 
 const initialState = {
     login: '',
     tempLogin: '',
     switchPages: false
 };
-
 
 export default (state = initialState, action) => {
     switch (action.type) {
@@ -15,6 +14,8 @@ export default (state = initialState, action) => {
             return {...state, login: state.tempLogin};
         case CHANGE_TEMP_LOGIN:
             return {...state, tempLogin: action.tempLogin};
+        case CLOSE_CONNECTION:
+            return {...initialState};
         default:
             return state;
     }
