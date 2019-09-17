@@ -2,20 +2,23 @@ var app = require('express')();
 var express = require('express');
 var http = require('http').createServer(app);
 var io = require('socket.io')(http);
-
+var disconnectionDueToInactivityTimeout = 20000;
 var notifications = {
     authenticateWarning: 'Please enter your login first',
     authenticationSuccess: 'Authentication complete',
     authenticationChange: 'Login changed',
     userConnected: 'A new user connected',
     userDisconnected: 'has disconnected!',
+    nicknameTaken: 'Nickname has already taken!',
+    disconnectionDueToInactivity: 'You have been disconnected due to inactivity!',
 };
-var types = {
+var actionTypes = {
     notification: 'notification',
     message: 'message',
     disconnect: 'disconnect',
     login: 'login'
 };
+var connections = [];
 
 app.get('/', function (req, res) {
     res.sendFile(__dirname + '/index.html');
@@ -24,38 +27,63 @@ app.get('/', function (req, res) {
 app.use('/static/js', express.static('static/js'));
 app.use('/service-worker.js', express.static('/service-worker.js'));
 io.on('connection', function (socket) {
-    console.log('a user connected');
 
-    socket.on(types.disconnect, function (socket) {
-        io.sockets.emit(types.notification, {
+    socket.setTimeout = () => {
+        socket.timeout = setTimeout(() => {
+            socket.emit(actionTypes.notification, {
+                message: notifications.disconnectionDueToInactivity
+            });
+            socket.disconnect(true);
+        }, disconnectionDueToInactivityTimeout);
+    };
+    socket.restartTimeout = () => {
+        clearTimeout(socket.timeout);
+        socket.setTimeout();
+    };
+
+    socket.on('users', function (socket) {
+        console.log(connections);
+    });
+    socket.on(actionTypes.disconnect, function (socket) {
+        connections.splice(connections.indexOf(socket.nickname),1);
+        io.sockets.emit(actionTypes.notification, {
             message: `${socket.nickname} ${notifications.userDisconnected}`
         });
     });
-    socket.on(types.message, function (msg) {
+    socket.on(actionTypes.message, function (msg) {
+        socket.restartTimeout(socket);
         if (typeof socket.nickname === 'undefined') {
-            socket.emit(types.notification, {
+            socket.emit(actionTypes.notification, {
                 message: notifications.authenticateWarning
             });
         } else {
-            io.sockets.emit(types.message, {
-                type: types.message,
+            io.sockets.emit(actionTypes.message, {
+                type: actionTypes.message,
                 nickname:socket.nickname,
                 message: msg
             });
         }
     });
-    socket.on(types.login, function (login) {
-        socket.nickname = login;
-        let message = (typeof socket.nickname === "undefined")
-            ? notifications.authenticationSuccess
-            : notifications.authenticationChange
-        ;
-        socket.emit(types.notification, {
-            message: message
-        });
-        io.sockets.emit(types.notification, {
-            message: `${notifications.userConnected} ${socket.nickname}`
-        });
+    socket.on(actionTypes.login, function (login) {
+        if (connections.indexOf(login) === -1) {
+            let message = (typeof socket.nickname === "undefined")
+                ? notifications.authenticationSuccess
+                : notifications.authenticationChange;
+            socket.nickname = login;
+            connections.push(socket.nickname);
+            socket.setTimeout();
+
+            socket.emit(actionTypes.notification, {
+                message: message
+            });
+            io.sockets.emit(actionTypes.notification, {
+                message: `${notifications.userConnected} ${socket.nickname}`
+            });
+        } else  {
+            socket.emit(actionTypes.notification, {
+                message: notifications.nicknameTaken
+            });
+        }
     });
 });
 
