@@ -1,8 +1,9 @@
 var app = require('express')();
 var express = require('express');
+var htmlspecialchars = require('htmlspecialchars');
 var http = require('http').createServer(app);
 var io = require('socket.io')(http);
-var disconnectionDueToInactivityTimeout = 20000;
+var disconnectionDueToInactivityTimeout = 200000;
 var notifications = {
     authenticateWarning: 'Please enter your login first',
     authenticationSuccess: 'Authentication complete',
@@ -24,7 +25,7 @@ app.get('/', function (req, res) {
     res.sendFile(__dirname + '/index.html');
 });
 
-app.use('/static/js', express.static('static/js'));
+app.use('/logo512.png', express.static('logo512.png'));
 app.use('/service-worker.js', express.static('/service-worker.js'));
 io.on('connection', function (socket) {
 

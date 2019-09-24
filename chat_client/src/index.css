@@ -6,10 +6,14 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+.input-holder {
+  bottom: 0px;
+  position: fixed;
+  width: 100%;
 }
 .input-holder .chat-input-text {
   width: 85%;
@@ -18,7 +22,21 @@ code {
 .input-holder .chat-input-button {
   width: 15%;
 }
+.message {
+  flex: 1;
+  height: 100%;
+  overflow: auto;
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.chat-holder {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin-bottom: 45px;
+}
 .button-close {
-  position: absolute;
+  position: fixed;
   right: 1px;
 }

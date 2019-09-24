@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from '../logo.svg';
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NameInput from "../containers/NameInputContainer";
@@ -16,11 +15,10 @@ class Main extends React.Component {
     updateLogin = (login) => {
         this.setState({ login: login });
     };
-
     render() {
         return <div className="App">
             <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo"/>
+                <img src="/logo512.png" className="App-logo" alt="logo"/>
                 <div className={'name-input-holder'}>
                     <NameInput />
                     <LoginButton />

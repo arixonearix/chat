@@ -5,7 +5,7 @@ import Message from "./Message";
 class ChatWindow extends React.Component {
     render() {
         let list = this.props.messages.map((message ,index) => {
-            return <div key={index}>
+            return <div className={'message'} key={index}>
                 <Message nickname={message.nickname} message={message.message} />
             </div>
         });
