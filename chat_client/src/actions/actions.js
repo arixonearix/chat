@@ -3,9 +3,9 @@ export const CHANGE_TEMP_LOGIN = 'CHANGE_TEMP_LOGIN';
 export const SEND_MESSAGE = 'SEND_MESSAGE';
 export const CHANGE_TEMP_MESSAGE = 'CHANGE_TEMP_MESSAGE';
 export const SEND_TEMP_MESSAGE = 'SEND_TEMP_MESSAGE';
-export const NEW_MESSAGE ='NEW_MESSAGE';
-export const CLOSE_CONNECTION ='CLOSE_CONNECTION';
-
+export const NEW_MESSAGE = 'NEW_MESSAGE';
+export const CLOSE_CONNECTION = 'CLOSE_CONNECTION';
+export const LOGIN_PROCESS = 'LOGIN_PROCESS';
 
 export const toggleExpand = (login) => ({
     type: LOGIN,
@@ -42,5 +42,11 @@ export const newMessage = (messageObject) => {
 export const closeConnection = () => {
     return {
         type: CLOSE_CONNECTION
+    };
+};
+export const handleControl = (answer) => {
+    return {
+        type: LOGIN_PROCESS,
+        ...answer
     };
 };
