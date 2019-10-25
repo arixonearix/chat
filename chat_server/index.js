@@ -31,12 +31,6 @@ app.get('/', function (req, res) {
 }).get('/log', function (req, res) {
     res.sendFile(__dirname + '/log.html');
 }).get('/getLog', function (req, res) {
-    // let data = {
-    //     nickname: "name",
-    //     message: "sdfg33name",
-    //     created_at: "sdfgname",
-    // };
-    // res.json(data);
     io.getLog()
         .then((records) => {
             res.json(records);
